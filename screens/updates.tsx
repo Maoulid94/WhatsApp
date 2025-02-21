@@ -2,7 +2,7 @@ import useThemeColors from "../components/ThemeColors";
 import HeaderBox from "../components/HeaderBox";
 import { Text, View, StyleSheet } from "react-native";
 
-export default function Satuts() {
+export default function Status() {
   const colors = useThemeColors();
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>

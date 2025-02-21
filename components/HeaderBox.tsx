@@ -1,5 +1,4 @@
 import { Ionicons } from "@expo/vector-icons";
-import { ThemeContext } from "@react-navigation/native";
 import { Text, View, StyleSheet } from "react-native";
 import useThemeColors from "./ThemeColors";
 
