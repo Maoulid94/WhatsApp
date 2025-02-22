@@ -24,7 +24,7 @@ const CallHistory: React.FC = () => {
           {item.name}
         </Text>
         <View style={{ flexDirection: "row" }}>
-          <View style={styles.iconContainer}>
+          <View>
             <item.callIcon size={20} color="green" rotation={0} />
           </View>
           <Text style={[styles.text, { color: colors.text }]}>
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   iconContainer: {
-    marginLeft: 10,
+    // marginLeft: 2,
   },
   favouriteBox: {
     flex: 1,

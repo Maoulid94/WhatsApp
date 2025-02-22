@@ -59,36 +59,6 @@ const statutsInfo = [
     text: "Yesterday",
     imagePath: require("../assets/images/Profile/photo10.jpg"),
   },
-  {
-    id: 11,
-    name: "Shamis Habane",
-    text: "Today",
-    imagePath: require("../assets/images/Profile/photo1.jpg"),
-  },
-  {
-    id: 12,
-    name: "Shamis Habane",
-    text: "Today",
-    imagePath: require("../assets/images/Profile/photo2.jpg"),
-  },
-  {
-    id: 13,
-    name: "Shamis Habane",
-    text: "Today",
-    imagePath: require("../assets/images/Profile/photo3.jpg"),
-  },
-  {
-    id: 14,
-    name: "Shamis Habane",
-    text: "Today",
-    imagePath: require("../assets/images/Profile/photo4.jpg"),
-  },
-  {
-    id: 15,
-    name: "Shamis Habane",
-    text: "Today",
-    imagePath: require("../assets/images/Profile/photo5.jpg"),
-  },
 ];
 
 export default statutsInfo;
