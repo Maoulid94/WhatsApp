@@ -7,13 +7,13 @@ export default function Chats() {
   const colors = useThemeColors();
   console.log("Applied Theme Colors:", colors);
   return (
-      <View style={[styles.container, { backgroundColor: colors.background }]}>
-        <HeaderBox
-          title="WhatsApp"
-          icons={["qr-code", "camera-outline", "ellipsis-vertical"]}
-        />
-        <ChatsItem />
-      </View>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <HeaderBox
+        title="WhatsApp"
+        icons={["qr-code", "camera-outline", "ellipsis-vertical"]}
+      />
+      <ChatsItem />
+    </View>
   );
 }
 const styles = StyleSheet.create({

@@ -26,7 +26,6 @@ export default function ListItems() {
             <Ionicons name="add-outline" size={18} color={colors.text} />
           </View>
         ) : (
-          // Normal Item
           <View
             style={[
               styles.item,
@@ -42,21 +41,19 @@ export default function ListItems() {
 }
 
 const styles = StyleSheet.create({
-  container: { flexDirection: "row", alignItems: "center" },
   listContainer: {
     alignSelf: "center",
     marginLeft: 15,
     marginVertical: 15,
   },
   item: {
-    paddingHorizontal: 9,
+    paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 15,
     marginRight: 10,
   },
   text: {
     fontSize: 12,
-    color: "#333",
   },
   addButton: {
     paddingHorizontal: 9,

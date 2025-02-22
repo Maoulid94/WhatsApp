@@ -5,63 +5,64 @@ import {
   Image,
   StyleSheet,
   TextInput,
+  Modal,
+  Pressable,
 } from "react-native";
 import chatInfo from "../constants/chatInfo";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import useThemeColors from "./ThemeColors";
 import ListItems from "@/components/listItems";
-import ChatSearchBar from "./searchBar";
+import SearchBarContent from "./searchBar";
 export default function ChatsItem() {
   const colors = useThemeColors();
   const [searchQuery, setSearchQuery] = useState("");
 
-  // 🔹 Filter chats based on search input
-  const filteredChats = chatInfo.filter((chat) =>
-    chat.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
   return (
-    <FlatList
-      data={chatInfo}
-      keyExtractor={(item) => item.id.toString()}
-      showsVerticalScrollIndicator={false}
-      ListHeaderComponent={
-        <>
-          <ChatSearchBar
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-          />
-          <ListItems />
-        </>
-      }
-      renderItem={({ item }) => (
-        <View style={[styles.chatItem, { backgroundColor: colors.background }]}>
-          <Image source={item.imagePath} style={styles.profileImage} />
-          <View style={styles.chatbox}>
-            <View style={styles.chatDetails}>
-              <Text style={[styles.chatName, { color: colors.subTitle }]}>
-                {item.name}
-              </Text>
-              <View style={styles.messageContainer}>
-                <Ionicons
-                  name={item.icon as any}
-                  size={14}
-                  color={"#34B7F1"}
-                  style={styles.icons}
-                />
-                <Text style={[styles.chatMessage, { color: colors.text }]}>
-                  {item.text}
+    <View style={{ flex: 1 }}>
+      <FlatList
+        data={chatInfo}
+        keyExtractor={(item) => item.id.toString()}
+        showsVerticalScrollIndicator={false}
+        ListHeaderComponent={
+          <>
+            <SearchBarContent />
+            <ListItems />
+          </>
+        }
+        renderItem={({ item }) => (
+          <View
+            style={[styles.chatItem, { backgroundColor: colors.background }]}
+          >
+            <Image source={item.imagePath} style={styles.profileImage} />
+            <View style={styles.chatbox}>
+              <View style={styles.chatDetails}>
+                <Text style={[styles.chatName, { color: colors.subTitle }]}>
+                  {item.name}
                 </Text>
+                <View style={styles.messageContainer}>
+                  {item.icon && (
+                    <Ionicons
+                      name={item.icon as keyof typeof Ionicons.glyphMap}
+                      size={14}
+                      color={"#34B7F1"}
+                      style={styles.icons}
+                    />
+                  )}
+                  <Text style={[styles.chatMessage, { color: colors.text }]}>
+                    {item.text}
+                  </Text>
+                </View>
               </View>
+              <Text style={[styles.chatTime, { color: colors.text }]}>
+                {item.time}
+              </Text>
             </View>
-            <Text style={[styles.chatTime, { color: colors.text }]}>
-              {item.time}
-            </Text>
           </View>
-        </View>
-      )}
-    />
+        )}
+      />
+      {/* 🔹 Search Modal */}
+    </View>
   );
 }
 

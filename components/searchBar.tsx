@@ -1,40 +1,45 @@
-import React from "react";
-import { View, TextInput, StyleSheet, Pressable, Keyboard } from "react-native";
+import React, { useState } from "react";
+import { View, Pressable, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import useThemeColors from "./ThemeColors";
+import chatInfo from "../constants/chatInfo";
+import SearchModal from "../components/serachModal";
 
-interface ChatSearchBarProps {
-  searchQuery: string;
-  setSearchQuery: (text: string) => void;
-  onPress?: () => void; // Optional prop for handling external navigation
-}
-
-const ChatSearchBar: React.FC<ChatSearchBarProps> = ({
-  searchQuery,
-  setSearchQuery,
-  onPress,
-}) => {
+export default function SearchBarContent() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchModal, setSearchModal] = useState(false);
   const colors = useThemeColors();
 
-  return (
-    <Pressable
-      onPress={onPress || (() => Keyboard.dismiss())} // Dismiss keyboard if no external function is provided
-      style={[
-        styles.searchContainer,
-        { backgroundColor: colors.backgroundColorItens },
-      ]}
-    >
-      <Ionicons name="search-outline" size={20} color={colors.text} />
-      <TextInput
-        style={[styles.searchInput, { color: colors.text }]}
-        placeholder="Ask Meta AI or Search"
-        placeholderTextColor={colors.text}
-        value={searchQuery}
-        onChangeText={setSearchQuery}
-      />
-    </Pressable>
+  // 🔹 Filter chats based on search input
+  const filteredChats = chatInfo.filter((chat) =>
+    chat.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
-};
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Pressable
+        onPress={() => setSearchModal(true)}
+        style={[
+          styles.searchContainer,
+          { backgroundColor: colors.backgroundColorItens },
+        ]}
+      >
+        <Ionicons name="search-outline" size={20} color={colors.text} />
+        <Text style={[styles.searchInput, { color: colors.text }]}>
+          Ask Meta AI or Search
+        </Text>
+      </Pressable>
+
+      <SearchModal
+        visible={searchModal}
+        onClose={() => setSearchModal(false)}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        filteredChats={filteredChats}
+      />
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   searchContainer: {
@@ -49,13 +54,10 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 3,
-    elevation: 3, // For Android shadow
+    elevation: 3,
   },
   searchInput: {
-    flex: 1,
     marginLeft: 8,
     fontSize: 16,
   },
 });
-
-export default ChatSearchBar;
